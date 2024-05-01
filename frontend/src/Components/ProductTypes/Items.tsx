@@ -11,7 +11,7 @@ import {
 
 const Items = () => (
   <>
-    <ProductTypesContainer productType="Item Management">
+    {/* <ProductTypesContainer productType="Item Management">
       <Endpoint
         endpoint="item"
         categories={itemCategories}
@@ -28,7 +28,7 @@ const Items = () => (
         description="Retrieve high-level information about all accounts associated with an item."
         transformData={transformAccountsData}
       />
-    </ProductTypesContainer>
+    </ProductTypesContainer> */}
   </>
 );
 

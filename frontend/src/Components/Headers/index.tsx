@@ -10,8 +10,8 @@ import styles from "./index.module.scss";
 
 const Header = () => {
   const {
-    itemId,
-    accessToken,
+    // itemId,
+    //accessToken,
     linkToken,
     linkSuccess,
     isItemAccess,
@@ -22,20 +22,18 @@ const Header = () => {
 
   return (
     <div className={styles.grid}>
-      <h3 className={styles.title}>Plaid Quickstart</h3>
+      <h3 className={styles.title}>Wealth Wise</h3>
 
       {!linkSuccess ? (
         <>
           <h4 className={styles.subtitle}>
-            A sample end-to-end integration with Plaid
+            Data-driven financial management for smarter decisions and financial
+            freedom
           </h4>
-          <p className={styles.introPar}>
-            The Plaid flow begins when your user wants to connect their bank
-            account to your app. Simulate this by clicking the button below to
-            launch Link - the client-side component that your users will
-            interact with in order to link their accounts to Plaid and allow you
-            to access their accounts via the Plaid API.
-          </p>
+          {/* <p className={styles.introPar}>
+           A financial companion that helps you track and analyze your transactions, providing valuable insights into your spending habits, trends, and patterns. With real-time tracking, advanced categorization, and interactive data visualization tools, you'll stay on top of your finances and make informed decisions.
+           Experience the power of data-driven financial management with Wealth Wise and take control of your financial future.
+          </p> */}
           {/* message if backend is not running and there is no link token */}
           {!backend ? (
             <Callout warning>
@@ -84,8 +82,13 @@ const Header = () => {
               </Button>
             </div>
           ) : (
-            <div className={styles.linkButton}>
+            <div className={styles.linkButton} style={{ display: "flex" }}>
               <Link />
+              <img
+                src="6270.jpg"
+                alt="Image"
+                style={{ height: "400px", width: "500px" }}
+              />
             </div>
           )}
         </>
@@ -93,62 +96,46 @@ const Header = () => {
         <>
           {isPaymentInitiation ? (
             <>
-            <h4 className={styles.subtitle}>
-              Congrats! Your payment is now confirmed.
-              <p/>
-              <Callout>
-                You can see information of all your payments in the{' '}
-                <InlineLink
+              <h4 className={styles.subtitle}>
+                Congrats! Your payment is now confirmed.
+                <p />
+                <Callout>
+                  You can see information of all your payments in the{" "}
+                  <InlineLink
                     href="https://dashboard.plaid.com/activity/payments"
                     target="_blank"
-                >
-                  Payments Dashboard
-                </InlineLink>
-                .
-              </Callout>
-            </h4>
-            <p className={styles.requests}>
-              Now that the 'payment_id' stored in your server, you can use it to access the payment information:
-            </p>
-          </>
-          ) : /* If not using the payment_initiation product, show the item_id and access_token information */ (
-            <>
-            {isItemAccess ? (
-                <h4 className={styles.subtitle}>
-                  Congrats! By linking an account, you have created an{" "}
-                  <InlineLink
+                  >
+                    Payments Dashboard
+                  </InlineLink>
+                  .
+                </Callout>
+              </h4>
+              <p className={styles.requests}>
+                Now that the 'payment_id' stored in your server, you can use it
+                to access the payment information:
+              </p>
+            </>
+          ) : (
+            /* If not using the payment_initiation product, show the item_id and access_token information */ <>
+              {isItemAccess ? (
+                <h5 className={styles.subtitle}>
+                  Congrats! You have linked your account to Wealth Wise.
+                  {/* <InlineLink
                       href="http://plaid.com/docs/quickstart/glossary/#item"
                       target="_blank"
                   >
                     Item
                   </InlineLink>
-                  .
-                </h4>
-            ) : (
+                  . */}
+                </h5>
+              ) : (
                 <h4 className={styles.subtitle}>
                   <Callout warning>
                     Unable to create an item. Please check your backend server
                   </Callout>
                 </h4>
-            )}
-            <div className={styles.itemAccessContainer}>
-              <p className={styles.itemAccessRow}>
-                <span className={styles.idName}>item_id</span>
-                <span className={styles.tokenText}>{itemId}</span>
-              </p>
-
-              <p className={styles.itemAccessRow}>
-                <span className={styles.idName}>access_token</span>
-                <span className={styles.tokenText}>{accessToken}</span>
-              </p>
-            </div>
-            {isItemAccess && (
-                <p className={styles.requests}>
-                  Now that you have an access_token, you can make all of the
-                  following requests:
-                </p>
-            )}
-          </>
+              )}
+            </>
           )}
         </>
       )}

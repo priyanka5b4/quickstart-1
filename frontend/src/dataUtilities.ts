@@ -44,6 +44,7 @@ interface TransactionsDataItem {
   amount: string;
   date: string;
   name: string;
+  personal_finance_category: string;
 }
 
 interface IdentityDataItem {
@@ -180,6 +181,10 @@ export const transactionsCategories: Array<Categories> = [
     title: "Date",
     field: "date",
   },
+  {
+    title:"Category" , 
+    field: "personal_finance_category"
+  }
 ];
 
 export const identityCategories: Array<Categories> = [
@@ -440,6 +445,7 @@ export const transformTransactionsData = (
       name: t.name!,
       amount: formatCurrency(t.amount!, t.iso_currency_code),
       date: t.date,
+      personal_finance_category: t.personal_finance_category?.primary ?? ""
     };
     return item;
   });
