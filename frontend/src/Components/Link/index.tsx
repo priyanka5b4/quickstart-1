@@ -47,7 +47,7 @@ const Link = () => {
       dispatch({ type: "SET_STATE", state: { linkSuccess: true } });
       window.history.pushState("", "", "/");
     },
-    [dispatch]
+    [dispatch, isPaymentInitiation]
   );
 
   let isOauth = false;

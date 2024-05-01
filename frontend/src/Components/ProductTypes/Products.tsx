@@ -14,6 +14,8 @@ import {
   incomePaystubsCategories,
   transferCategories,
   transferAuthorizationCategories,
+  signalCategories,
+  statementsCategories,
   transformAuthData,
   transformTransactionsData,
   transformBalanceData,
@@ -26,6 +28,8 @@ import {
   transformTransferData,
   transformTransferAuthorizationData,
   transformIncomePaystubsData,
+  transformSignalData,
+  transformStatementsData,
 } from "../../dataUtilities";
 import Transactions from "../Transactions/transactions";
 import Insights from "../Insights/index";
