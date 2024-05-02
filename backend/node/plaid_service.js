@@ -147,3 +147,11 @@ exports.getTrnsactionDetails = async (cursor, ACCESS_TOKEN) => {
   // prettyPrintResponse(data);
   return response;
 };
+
+exports.getInstitutionDetailsById = async (institution_id) => {
+  const institutionResponse = await client.institutionsGetById({
+    institution_id: institution_id,
+  });
+  prettyPrintResponse(institutionResponse);
+  return institutionResponse;
+};

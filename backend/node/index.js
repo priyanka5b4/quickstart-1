@@ -54,7 +54,7 @@ app.post('/api/set_access_token', async function (request, response, next) {
       );
 
       // inserting transaction details
-      //await db_service.InsertTransactionDetails(res.data.access_token);
+      await db_service.InsertTransactionDetails(res.data.access_token);
 
       return response.json(res.data);
     });
@@ -79,13 +79,19 @@ app.get('/api/transactions', function (request, response, next) {
 app.get('/api/institutions', async (req, res) => {
   try {
     const items = await Item.find({});
-    const itemIds = items.map((item) => item._id);
+    const itemIds = items.map((item) => item.item_id);
+
+    const institutions = await items.map((item) => 
+    {    plaid_service.getInstitutionById(item.institution_id).then((res) => {
+      return res.data;
+    }
+     });
 
     const accounts = await Account.find({ item_id: { $in: itemIds } });
     const institutionsWithAccounts = items.map((item) => ({
       ...item._doc,
       accounts: accounts.filter(
-        (acc) => acc.item_id.toString() === item._id.toString(),
+        (acc) => acc.item_id.toString() === item.item_id.toString(),
       ),
     }));
 

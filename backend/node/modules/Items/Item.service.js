@@ -18,7 +18,7 @@ module.exports.createItem = async (newItem) => {
 
 module.exports.updateCursor = async (item_id, cursor) => {
   try {
-    await Item.updateOne({ item_id: item_id }, cursor);
+    await Item.updateOne({ item_id: item_id }, { cursor: cursor });
   } catch (err) {
     console.log(err);
   }
