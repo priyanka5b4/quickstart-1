@@ -17,14 +17,17 @@ const TypeContainer: React.FC<Props> = (props) => {
       {showInsights && <Insights transactionsData={props.transactions} />}
       {!showInsights && (
         <div className={styles.container}>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <h4 className={styles.header}>{props.productType}</h4>
+          <div style={{ display: "flex", flexDirection: "row", alignContent: "center", justifyContent: "center", alignItems: "center" }}>
+            <h4 className={styles.header} style={{ alignContent: "center" }}
+            >{props.productType}</h4>
             <div
               style={{
                 margin: "4rem",
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 gap: "1rem",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <Button type="button" large onClick={() => setShowInsights(true)}>
@@ -40,7 +43,7 @@ const TypeContainer: React.FC<Props> = (props) => {
                   );
                 }}
               >
-                Chat with Finance AI
+                Finance AI
               </Button>
             </div>
           </div>

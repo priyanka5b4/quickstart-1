@@ -9,7 +9,7 @@ $unit: 1rem;
   flex-direction: column;
   align-items: center;
   box-shadow: $shadow-small;
-  margin: 0 0 3 * $unit 0;
+  margin: 0 0 1 * $unit 0;
 }
 
 .header {
@@ -17,5 +17,5 @@ $unit: 1rem;
   border-bottom: 0px;
   height: 13 * $unit;
   font-weight: 800;
-  margin: 4rem;
+  margin: 1rem;
 }

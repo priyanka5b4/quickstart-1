@@ -91,7 +91,7 @@ const App = () => {
         {linkSuccess && (
           <>
             {isPaymentInitiation && <Products />}
-            {isItemAccess && <>{/* <Items /> */}</>}
+            {isItemAccess && <><Products /></>}
           </>
         )}
       </div>
