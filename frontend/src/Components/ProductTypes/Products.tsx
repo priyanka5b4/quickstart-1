@@ -46,10 +46,10 @@ const Products = () => {
         productType="Recent Transactions"
         transactions={transactionsData}
       >
-        <Transactions
+        {/* <Transactions
           transactionsData={transactionsData}
           setTransactionsData={setTransactionsData}
-        />
+        /> */}
       </ProductTypesContainer>
     </>
   );

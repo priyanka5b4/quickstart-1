@@ -84,11 +84,11 @@ const Header = () => {
           ) : (
             <div className={styles.linkButton} style={{ display: "flex" }}>
               <Link />
-              <img
+              {/* <img
                 src="6270.jpg"
                 alt="Image"
                 style={{ height: "400px", width: "500px" }}
-              />
+              /> */}
             </div>
           )}
         </>

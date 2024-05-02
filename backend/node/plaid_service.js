@@ -98,7 +98,7 @@ exports.getAccountDetails = async (ACCESS_TOKEN) => {
   const accountsResponse = await client.accountsGet({
     access_token: ACCESS_TOKEN,
   });
-  prettyPrintResponse(transferAuthorizationCreateResponse);
+  prettyPrintResponse(accountsResponse);
   return accountsResponse;
 };
 
@@ -135,4 +135,15 @@ exports.getTransactions = async (ACCESS_TOKEN) => {
   const recently_added = [...added].sort(compareTxnsByDateAscending);
   return { latest_transactions: recently_added };
   return recently_added;
+};
+
+exports.getTrnsactionDetails = async (cursor, ACCESS_TOKEN) => {
+  const request = {
+    access_token: ACCESS_TOKEN,
+    cursor: cursor,
+  };
+  const response = await client.transactionsSync(request);
+  const data = response.data;
+  // prettyPrintResponse(data);
+  return response;
 };

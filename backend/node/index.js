@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const plaid_service = require('./plaid_service');
 const db_service = require('./db_service');
 const db = require('./core/dbLib/db.connect');
+const Item = require('./modules/Items/Item.model');
+const Account = require('./modules/Accounts/account.model');
 
 db.connect(true);
 
@@ -37,19 +39,22 @@ app.post('/api/create_link_token', async function (request, response, next) {
   }
 });
 
-app.post('/api/set_access_token', function (request, response, next) {
+app.post('/api/set_access_token', async function (request, response, next) {
   try {
     PUBLIC_TOKEN = request.body.public_token;
-    plaid_service.setAccessToken(PUBLIC_TOKEN).then((res) => {
+    plaid_service.setAccessToken(PUBLIC_TOKEN).then(async (res) => {
       // prettyPrintResponse(res.data);
-
+      console.log(res.data);
       ACCESS_TOKEN = res.data.access_token;
 
       // Inserting account details
-      // db_service.InsertNewItemDetails(res.data.item_id, res.data.access_token);
+      await db_service.InsertNewItemDetails(
+        res.data.item_id,
+        res.data.access_token,
+      );
 
       // inserting transaction details
-      // db_service.InsertTransactionDetails(res.data.access_token);
+      //await db_service.InsertTransactionDetails(res.data.access_token);
 
       return response.json(res.data);
     });
@@ -63,10 +68,29 @@ app.get('/api/transactions', function (request, response, next) {
     console.log(ACCESS_TOKEN);
     plaid_service.getTransactions(ACCESS_TOKEN).then((res) => {
       // prettyPrintResponse(res.data);
-      console.log(res);
+      //console.log(res);
       return response.json(res);
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+  }
+});
+
+app.get('/api/institutions', async (req, res) => {
+  try {
+    const items = await Item.find({});
+    const itemIds = items.map((item) => item._id);
+
+    const accounts = await Account.find({ item_id: { $in: itemIds } });
+    const institutionsWithAccounts = items.map((item) => ({
+      ...item._doc,
+      accounts: accounts.filter(
+        (acc) => acc.item_id.toString() === item._id.toString(),
+      ),
+    }));
+
+    res.json(institutionsWithAccounts);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });

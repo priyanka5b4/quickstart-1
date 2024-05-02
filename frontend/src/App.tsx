@@ -6,6 +6,7 @@ import Items from "./Components/ProductTypes/Items";
 import Context from "./Context";
 
 import styles from "./App.module.scss";
+import InstitutionsTable from "./Components/InstitutionsTable";
 
 const App = () => {
   const { linkSuccess, isItemAccess, isPaymentInitiation, dispatch } =
@@ -86,15 +87,11 @@ const App = () => {
     <div className={styles.App}>
       <div className={styles.container}>
         <Header />
+        <InstitutionsTable />
         {linkSuccess && (
           <>
             {isPaymentInitiation && <Products />}
-            {isItemAccess && (
-              <>
-                <Products />
-                {/* <Items /> */}
-              </>
-            )}
+            {isItemAccess && <>{/* <Items /> */}</>}
           </>
         )}
       </div>
