@@ -81,12 +81,6 @@ app.get('/api/institutions', async (req, res) => {
     const items = await Item.find({});
     const itemIds = items.map((item) => item.item_id);
 
-    const institutions = await items.map((item) => 
-    {    plaid_service.getInstitutionById(item.institution_id).then((res) => {
-      return res.data;
-    }
-     });
-
     const accounts = await Account.find({ item_id: { $in: itemIds } });
     const institutionsWithAccounts = items.map((item) => ({
       ...item._doc,
